@@ -1,0 +1,426 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background: #f4f4f4;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Cabeçalho */
+header {
+  background: #003087;
+  color: white;
+  padding: 15px 0;
+  top: 0;
+  z-index: 100;
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+header .logo {
+  height: 40px;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+header nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.95em;
+  padding: 8px;
+  transition: background 0.3s ease;
+}
+
+header nav ul li a:hover {
+  text-decoration: underline;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+}
+
+header nav ul li a.logout-link {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.95em;
+  padding: 8px;
+  transition: background 0.3s ease;
+}
+
+header nav ul li a.logout-link:hover {
+  text-decoration: underline;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+}
+
+/* Seção Como Funciona */
+.como-funciona {
+  padding: 40px 0;
+  text-align: center;
+}
+
+.como-funciona h1 {
+  font-size: 2em;
+  color: #003087;
+  margin-bottom: 12px;
+}
+
+.como-funciona p {
+  font-size: 1.1em;
+  margin-bottom: 20px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Passos */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+  justify-items: center;
+}
+
+.step {
+  width: 100%;
+  max-width: 300px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.step:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.step.active {
+  border: 2px solid #003087;
+}
+
+.step img {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.step h2 {
+  font-size: 1.4em;
+  color: #003087;
+  margin-bottom: 10px;
+}
+
+.step p {
+  font-size: 1em;
+}
+
+/* Benefícios */
+.beneficios {
+  margin-bottom: 40px;
+}
+
+.beneficios h2 {
+  font-size: 1.5em;
+  color: #003087;
+  margin-bottom: 15px;
+}
+
+.beneficios ul {
+  list-style: none;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.beneficios ul li {
+  margin-bottom: 12px;
+  font-size: 1em;
+  display: flex;
+  align-items: flex-start;
+}
+
+.beneficios ul li::before {
+  content: "✔";
+  color: #00a859;
+  margin-right: 10px;
+  font-size: 1.2em;
+}
+
+.beneficios ul li strong {
+  color: #003087;
+}
+
+/* Links Legais */
+.links-legais {
+  margin-bottom: 40px;
+}
+
+.links-legais h2 {
+  font-size: 1.5em;
+  color: #003087;
+  margin-bottom: 15px;
+}
+
+.links-legais p {
+  max-width: 600px;
+  margin: 0 auto 15px;
+}
+
+.links-legais ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.links-legais ul li a {
+  color: #003087;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1em;
+  padding: 8px 16px;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.links-legais ul li a:hover {
+  text-decoration: underline;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Rodapé */
+footer {
+  background: #003087;
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsividade para tablets (≤768px) */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+
+  .container {
+    padding: 0 10px;
+  }
+
+  /* Cabeçalho */
+  header .container {
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px;
+  }
+
+  header .logo {
+    height: 50px;
+  }
+
+  header nav ul {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+  }
+
+  header nav ul li a {
+    font-size: 1em;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+  }
+
+  header nav ul li a.logout-link {
+    font-size: 1em;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Seção Como Funciona */
+  .como-funciona {
+    padding: 30px 0;
+  }
+
+  .como-funciona h1 {
+    font-size: 1.6em;
+  }
+
+  .como-funciona p {
+    font-size: 1em;
+    padding: 0 10px;
+  }
+
+  /* Passos */
+  .steps {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .step {
+    max-width: 350px;
+  }
+
+  .step img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .step h2 {
+    font-size: 1.3em;
+  }
+
+  .step p {
+    font-size: 0.95em;
+  }
+
+  /* Benefícios */
+  .beneficios h2 {
+    font-size: 1.4em;
+  }
+
+  .beneficios ul {
+    max-width: 500px;
+  }
+
+  .beneficios ul li {
+    font-size: 0.95em;
+  }
+
+  /* Links Legais */
+  .links-legais h2 {
+    font-size: 1.4em;
+  }
+
+  .links-legais ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .links-legais ul li a {
+    font-size: 0.95em;
+    padding: 8px;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Rodapé */
+  footer {
+    padding: 12px 0;
+    font-size: 0.9em;
+  }
+}
+
+/* Responsividade para smartphones (≤480px) */
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  /* Cabeçalho */
+  header .logo {
+    height: 50px;
+  }
+
+  header nav ul li a {
+    font-size: 0.9em;
+    padding: 8px;
+  }
+
+  header nav ul li a.logout-link {
+    font-size: 0.9em;
+    padding: 8px;
+  }
+
+  /* Seção Como Funciona */
+  .como-funciona h1 {
+    font-size: 1.4em;
+  }
+
+  .como-funciona p {
+    font-size: 0.9em;
+  }
+
+  /* Passos */
+  .step {
+    max-width: 300px;
+    padding: 15px;
+  }
+
+  .step img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .step h2 {
+    font-size: 1.2em;
+  }
+
+  .step p {
+    font-size: 0.9em;
+  }
+
+  /* Benefícios */
+  .beneficios h2 {
+    font-size: 1.3em;
+  }
+
+  .beneficios ul li {
+    font-size: 0.9em;
+  }
+
+  .beneficios ul li::before {
+    font-size: 1.1em;
+  }
+
+  /* Links Legais */
+  .links-legais h2 {
+    font-size: 1.3em;
+  }
+
+  .links-legais ul li a {
+    font-size: 0.9em;
+  }
+
+  /* Rodapé */
+  footer {
+    font-size: 0.85em;
+  }
+}

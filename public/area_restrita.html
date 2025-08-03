@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Área Restrita - Achados e Perdidos SENAI</title>
+  <link rel="stylesheet" href="css/area_restrita.css">
+  <link rel="icon" href="img/startech-icon.png" type="image/x-icon">
+</head>
+<body>
+  <!-- Cabeçalho -->
+  <header>
+    <div class="container">
+      <img src="img/senai-logo-1.png" alt="Logotipo SENAI" class="logo">
+      <nav>
+        <ul>
+          <li><a href="index.html">Página Inicial</a></li>
+          <li><a href="itens_cadastrados.html">Itens Cadastrados</a></li>
+          <li><a href="listar_usuarios.html">Listar Usuários</a></li>
+          <li><a href="registrar_item_encontrado.html">Registrar Encontrado</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Popup de Login -->
+  <div id="login-popup" class="popup">
+    <div class="popup-content">
+      <h2>Login - Área Restrita</h2>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="registro-login">Registro Acadêmico:</label>
+          <input type="text" id="registro-login" name="registro" required>
+        </div>
+        <div class="form-group password-group">
+          <label for="senha-login">Senha:</label>
+          <div class="password-wrapper">
+            <input type="password" id="senha-login" name="senha" required>
+            <button type="button" class="toggle-password" data-target="senha-login" aria-label="Toggle password visibility">
+              <span class="eye-icon">👁️</span>
+            </button>
+          </div>
+        </div>
+        <button type="submit" class="btn-login">Entrar</button>
+        <a href="index.html" class="btn-cancel" id="cancel-login">Cancelar</a>
+      </form>
+      <p class="toggle-popup">Não tem uma conta? <a href="#" id="show-register">Cadastrar-se</a></p>
+      <div id="login-feedback" class="feedback"></div>
+    </div>
+  </div>
+
+  <!-- Popup de Cadastro -->
+  <div id="register-popup" class="popup">
+    <div class="popup-content">
+      <h2>Cadastrar Usuário Master</h2>
+      <form id="register-form">
+        <div class="form-group">
+          <label for="nome">Nome:</label>
+          <input type="text" id="nome" name="nome" required>
+        </div>
+        <div class="form-group">
+          <label for="sobrenome">Sobrenome:</label>
+          <input type="text" id="sobrenome" name="sobrenome" required>
+        </div>
+        <div class="form-group">
+          <label for="email">E-mail (@senaimgaluno.com.br):</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="registro-register">Registro Acadêmico:</label>
+          <input type="text" id="registro-register" name="registro" required>
+        </div>
+        <div class="form-group password-group">
+          <label for="senha-register">Senha:</label>
+          <div class="password-wrapper">
+            <input type="password" id="senha-register" name="senha" required>
+            <button type="button" class="toggle-password" data-target="senha-register" aria-label="Toggle password visibility">
+              <span class="eye-icon">👁️</span>
+            </button>
+          </div>
+        </div>
+        <div class="form-group password-group">
+          <label for="confirmar-senha">Confirmar Senha:</label>
+          <div class="password-wrapper">
+            <input type="password" id="confirmar-senha" name="confirmar_senha" required>
+            <button type="button" class="toggle-password" data-target="confirmar-senha" aria-label="Toggle password visibility">
+              <span class="eye-icon">👁️</span>
+            </button>
+          </div>
+        </div>
+        <button type="submit" class="btn-registrar">Registrar</button>
+        <a href="index.html" class="btn-cancel" id="cancel-register">Cancelar</a>
+      </form>
+      <p class="toggle-popup">Já tem uma conta? <a href="#" id="show-login">Fazer login</a></p>
+      <div id="register-feedback" class="feedback"></div>
+    </div>
+  </div>
+
+  <!-- Seção de Área Restrita -->
+  <section class="area-restrita">
+    <div class="container">
+      <h1>Área Restrita - Gerenciamento de Reivindicações</h1>
+      <p>Gerencie as reivindicações de itens encontrados. Apenas usuários master têm acesso.</p>
+      <div id="feedback" class="feedback"></div>
+      <table id="tabela-reivindicacoes">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Descrição</th>
+            <th>Categoria</th>
+            <th>Local</th>
+            <th>Data Encontrada</th>
+            <th>Reivindicado por</th>
+            <th>Descrição da Reivindicação</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="lista-reivindicacoes"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer>
+    <div class="container">
+      <p>SENAI | Contato: achados.perdidos@senai.br | <a href="politica_de_privacidade.html">Política de Privacidade</a> | <a href="termos_de_uso.html">Termos de Uso</a> | <a href="lgpd.html">LGPD</a> | <a href="sobre_empresa.html">Sobre</a></p>
+    </div>
+  </footer>
+
+  <script src="js/area_restrita.js"></script>
+</body>
+</html>

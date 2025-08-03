@@ -1,0 +1,192 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Garante que o body ocupe pelo menos a altura da janela */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  flex: 1 0 auto; /* Permite que o conteúdo principal cresça, mas não encolha além do necessário */
+}
+
+/* Cabeçalho */
+header {
+  background: #003087; /* Azul institucional SENAI */
+  color: white;
+  padding: 10px 0;
+  top: 0;
+  z-index: 100;
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .logo {
+  height: 50px;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+header nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+header nav ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Seção de Itens Cadastrados */
+.itens-cadastrados {
+  padding: 50px 0;
+  text-align: center;
+  flex: 1 0 auto; /* Garante que a seção ocupe o espaço disponível */
+}
+
+.itens-cadastrados h1 {
+  font-size: 2em;
+  color: #003087;
+  margin-bottom: 10px;
+}
+
+.itens-cadastrados p {
+  font-size: 1.1em;
+  margin-bottom: 20px;
+}
+
+.lista-itens {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.item-card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-card img {
+  max-width: 100px;
+  max-height: 100px;
+  border-radius: 5px;
+  margin-right: 20px;
+  object-fit: cover;
+}
+
+.item-info {
+  flex-grow: 1;
+}
+
+.item-info p {
+  margin: 5px 0;
+}
+
+.item-info p strong {
+  color: #003087;
+}
+
+.btn-remover {
+  background: #d32f2f;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-remover:hover {
+  background: #b71c1c;
+}
+
+.feedback {
+  margin-top: 20px;
+  font-size: 0.9em;
+  color: #d32f2f;
+}
+
+.feedback.success {
+  color: #00a859;
+}
+
+/* Rodapé */
+footer {
+  background: #003087;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  flex-shrink: 0; /* Impede que o footer encolha */
+}
+
+/* Para garantir que o footer fique no final em conteúdo curto */
+footer {
+  width: 100%;
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  header .container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  header nav ul {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .item-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .item-card img {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .btn-remover {
+    width: 100%;
+    text-align: center;
+  }
+}

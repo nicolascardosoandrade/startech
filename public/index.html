@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Achados e Perdidos SENAI</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="img/startech-icon.png" type="image/x-icon">
+</head>
+<body>
+  <!-- Cabeçalho -->
+  <header>
+    <div class="container">
+      <img src="img/senai-logo-1.png" alt="Logotipo SENAI" class="logo">
+      <span class="user-greeting" style="display: none;"></span>
+      <nav>
+        <ul>
+          <li><a href="registrar_item_perdido.html">Registrar Perdido</a></li>
+          <li><a href="registrar_item_encontrado.html">Registrar Encontrado</a></li>
+          <li><a href="buscar_itens_perdidos.html">Buscar Itens</a></li>
+          <li><a href="como_funciona.html">Como Funciona</a></li>
+          <li><a href="login.html" class="auth-link">Login</a></li>
+          <li><a href="cadastro_usuario.html" class="auth-link">Cadastre-se</a></li>
+          <li><a href="area_restrita.html" class="auth-link">Área Restrita</a></li>
+          <li><a href="#" class="logout-link" style="display: none;">Sair</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Seção Principal -->
+  <section class="hero">
+    <div class="container">
+      <h1>Achados e Perdidos SENAI</h1>
+      <p>Registre, busque e recupere seus itens de forma rápida e segura!</p>
+      <div class="cta-buttons">
+        <a href="registrar_item_perdido.html" class="btn btn-primary">Registrar Item Perdido</a>
+        <a href="registrar_item_encontrado.html" class="btn btn-secondary">Registrar Item Encontrado</a>
+        <a href="buscar_itens_perdidos.html" class="btn btn-search">Buscar Itens</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Carrossel com botões, indicadores e suporte a swipe -->
+  <section class="carousel-section">
+    <div class="carousel-wrapper">
+      <div class="carousel-track" id="carouselTrack">
+        <div class="carousel-slide">
+          <img src="img/carrossel1.jpg" alt="Imagem 1">
+          <div class="carousel-caption">
+            <h3>Registre seus itens perdidos</h3>
+            <p>Facilite a recuperação com descrições detalhadas.</p>
+          </div>
+        </div>
+        <div class="carousel-slide">
+          <img src="img/carrossel2.jpeg" alt="Imagem 2">
+          <div class="carousel-caption">
+            <h3>Encontre itens rapidamente</h3>
+            <p>Use nossa busca para localizar seus pertences.</p>
+          </div>
+        </div>
+        <div class="carousel-slide">
+          <img src="img/carrossel3.jpeg" alt="Imagem 3">
+          <div class="carousel-caption">
+            <h3>Devolução segura</h3>
+            <p>Recupere seus itens com segurança no setor pedagógico.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botões -->
+      <button class="carousel-btn prev" id="prevBtn" aria-label="Slide anterior">&#10094;</button>
+      <button class="carousel-btn next" id="nextBtn" aria-label="Próximo slide">&#10095;</button>
+
+      <!-- Indicadores -->
+      <div class="carousel-indicators" id="carouselIndicators">
+        <span data-slide="0" class="active"></span>
+        <span data-slide="1"></span>
+        <span data-slide="2"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Como Funciona -->
+  <section class="how-it-works">
+    <div class="container">
+      <h2>Como Funciona</h2>
+      <div class="steps">
+        <div class="step">
+          <img src="img/icone-registrar.png" alt="Ícone Registrar">
+          <h3>Registrar</h3>
+          <p>Registre seu item perdido ou encontrado no sistema.</p>
+        </div>
+        <div class="step">
+          <img src="img/icone-descrever.png" alt="Ícone Descrever">
+          <h3>Descrever</h3>
+          <p>Forneça detalhes para facilitar a identificação.</p>
+        </div>
+        <div class="step">
+          <img src="img/icone-notificacao.png" alt="Ícone Notificação">
+          <h3>Notificação</h3>
+          <p>Receba alertas quando houver correspondência.</p>
+        </div>
+        <div class="step">
+          <img src="img/icone-devolucao.png" alt="Ícone Devolução">
+          <h3>Devolução</h3>
+          <p>Retire seu item com segurança no setor pedagógico.</p>
+        </div>
+      </div>
+      <a href="como_funciona.html" class="btn btn-info">Saiba Mais</a>
+    </div>
+  </section>
+
+  <!-- Privacidade -->
+  <section class="privacy">
+    <div class="container">
+      <p>Seus dados estão protegidos! Nosso sistema segue a <strong><a href="lgpd.html">LGPD</a></strong> para garantir sua privacidade.</p>
+      <a href="politica_de_privacidade.html">Política de Privacidade</a>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer>
+    <div class="container">
+      <p>SENAI | Contato: achados.perdidos@senai.br | <a href="politica_de_privacidade.html">Política de Privacidade</a> | <a href="termos_de_uso.html">Termos de Uso</a> | <a href="lgpd.html">LGPD</a> | <a href="sobre_empresa.html">Sobre</a></p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>

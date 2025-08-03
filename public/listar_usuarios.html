@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerenciar Usuários - Achados e Perdidos SENAI</title>
+  <link rel="stylesheet" href="css/listar_usuarios.css">
+  <link rel="icon" href="img/startech-icon.png" type="image/x-icon">
+</head>
+<body>
+  <!-- Cabeçalho -->
+  <header>
+    <div class="container">
+      <img src="img/startechlogo4.png" alt="Logotipo SENAI" class="logo">
+      <span class="user-greeting" style="display: none;"></span>
+      <nav>
+        <ul>
+          <li><a href="area_restrita.html">Área Restrita</a></li>
+          <li><a href="registrar_item_encontrado.html" data-protected="true">Registrar Encontrado</a></li>
+          <li><a href="itens_cadastrados.html">Itens Cadastrados</a></li>
+          <li><a href="#" class="logout-link" style="display: none;">Sair</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Seção Principal -->
+  <main class="users-section">
+    <div class="container">
+      <h1>Gerenciar Usuários</h1>
+      <div id="access-denied" style="display: none;">
+        <p class="error-message">Acesso negado. Apenas usuários master podem acessar esta página.</p>
+        <a href="area_restrita.html" class="btn btn-primary">Voltar à Área Restrita</a>
+      </div>
+      <div id="users-container" style="display: none;">
+        <div class="table-controls">
+          <input type="text" id="search-input" placeholder="Buscar por nome, sobrenome ou email..." aria-label="Buscar usuários">
+        </div>
+        <div class="table-wrapper">
+          <table id="users-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Sobrenome</th>
+                <th>Email</th>
+                <th>Registro</th>
+                <th>Data de Criação</th>
+              </tr>
+            </thead>
+            <tbody id="users-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Rodapé -->
+  <footer>
+    <div class="container">
+      <p>SENAI | Contato: achados.perdidos@senai.br | <a href="politica_de_privacidade.html">Política de Privacidade</a> | <a href="termos_de_uso.html">Termos de Uso</a> | <a href="lgpd.html">LGPD</a> | <a href="sobre_empresa.html">Sobre</a></p>
+    </div>
+  </footer>
+
+  <script src="js/listar_usuarios.js"></script>
+</body>
+</html>

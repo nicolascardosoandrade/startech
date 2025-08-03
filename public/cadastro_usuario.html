@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro - Achados e Perdidos SENAI</title>
+  <link rel="stylesheet" href="css/cadastro_usuario.css">
+  <link rel="icon" href="img/startech-icon.png" type="image/x-icon">
+</head>
+<body>
+  <!-- Cabeçalho -->
+  <header>
+    <div class="container">
+      <img src="img/senai-logo-1.png" alt="Logotipo SENAI" class="logo">
+      <nav>
+        <ul>
+          <li><a href="index.html">Página Inicial</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="como_funciona.html">Como Funciona</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Seção de Cadastro -->
+  <section class="cadastro">
+    <div class="container">
+      <h1>Cadastro de Usuário</h1>
+      <p>Crie sua conta para acessar o sistema de Achados e Perdidos.</p>
+      <form id="cadastro-form">
+        <div class="form-group">
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
+        </div>
+        <div class="form-group">
+          <label for="sobrenome">Sobrenome</label>
+          <input type="text" id="sobrenome" name="sobrenome" placeholder="Digite seu sobrenome" required>
+        </div>
+        <div class="form-group">
+          <label for="email">E-mail Institucional</label>
+          <input type="email" id="email" name="email" placeholder="Digite seu e-mail (ex.: 0000000000@senaimgaluno.com.br)" required>
+        </div>
+        <div class="form-group">
+          <label for="registro">Registro Acadêmico</label>
+          <input type="text" id="registro" name="registro" placeholder="Digite seu registro (ex.: 0000000000)" required>
+        </div>
+        <div class="form-group">
+          <label for="senha">Senha</label>
+          <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+          <span class="toggle-password" id="toggle-senha">👁️</span>
+        </div>
+        <div class="form-group">
+          <label for="confirmar-senha">Confirmar Senha</label>
+          <input type="password" id="confirmar-senha" name="confirmar-senha" placeholder="Confirme sua senha" required>
+          <span class="toggle-password" id="toggle-confirmar-senha">👁️</span>
+        </div>
+        <div class="form-group">
+          <label>
+            <input type="checkbox" id="termos" name="termos" required>
+            Concordo com os <a href="termos_de_uso.html">Termos de Uso</a> e a <a href="politica_de_privacidade.html">Política de Privacidade</a>.
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+        <div id="feedback" class="feedback"></div>
+      </form>
+      <p class="login-link">
+        Já tem uma conta? <a href="login.html">Faça login</a>
+      </p>
+      <p class="privacy-notice">
+        Seus dados estão protegidos conforme a <strong>LGPD</strong>. <a href="politica_de_privacidade.html">Saiba mais</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer>
+    <div class="container">
+      <p>SENAI | Contato: achados.perdidos@senai.br | <a href="politica_de_privacidade.html">Política de Privacidade</a> | <a href="termos_de_uso.html">Termos de Uso</a> | <a href="lgpd.html">LGPD</a> | <a href="sobre_empresa.html">Sobre</a></p>
+    </div>
+  </footer>
+
+  <script src="js/cadastro_usuario.js"></script>
+</body>
+</html>

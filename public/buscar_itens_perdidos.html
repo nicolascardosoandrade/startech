@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buscar Itens Perdidos - Achados e Perdidos SENAI</title>
+  <link rel="stylesheet" href="css/buscar_itens_perdidos.css">
+  <link rel="icon" href="img/startech-icon.png" type="image/x-icon">
+</head>
+<body>
+  <!-- Cabeçalho -->
+  <header>
+    <div class="container">
+      <img src="img/senai-logo-1.png" alt="Logotipo SENAI" class="logo">
+      <nav>
+        <ul>
+          <li><a href="index.html">Página Inicial</a></li>
+          <li><a href="buscar_itens_perdidos.html">Buscar Itens</a></li>
+          <li><a href="registrar_item_perdido.html">Registrar Perdido</a></li>
+          <li><a href="como_funciona.html">Como Funciona</a></li>
+          <li><a href="login.html" class="auth-link">Login</a></li>
+          <li><a href="#" class="logout-link" style="display: none;">Sair</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Seção de Itens Cadastrados -->
+  <section class="itens-cadastrados">
+    <div class="container">
+      <h1>Itens Encontrados Cadastrados</h1>
+      <p>Veja a lista de itens encontrados registrados no sistema ou use os filtros para buscar itens específicos.</p>
+      <form id="busca-form" class="busca-form">
+        <div class="form-group">
+          <label for="termo">Nome do item:</label>
+          <input type="text" id="termo" name="termo" placeholder="Ex.: Caneta, Chaveiro">
+        </div>
+        <div class="form-group">
+          <label for="categoria">Categoria:</label>
+          <select id="categoria" name="categoria">
+            <option value="">Todas</option>
+            <option value="roupas">Roupas</option>
+            <option value="eletronicos">Eletrônicos</option>
+            <option value="documentos">Documentos</option>
+            <option value="outros">Outros</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="local">Local Encontrado:</label>
+          <select id="local" name="local">
+            <option value="">Todos</option>
+            <option value="biblioteca">Biblioteca</option>
+            <option value="sala">Sala</option>
+            <option value="refeitorio">Refeitório</option>
+            <option value="outros">Outros</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="data">Data Encontrada:</label>
+          <input type="date" id="data" name="data">
+        </div>
+        <button type="submit" class="btn-buscar">Buscar</button>
+      </form>
+      <div id="feedback" class="feedback"></div>
+      <div id="lista-resultados" class="lista-resultados"></div>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer>
+    <div class="container">
+      <p>SENAI | Contato: achados.perdidos@senai.br | <a href="politica_de_privacidade.html">Política de Privacidade</a> | <a href="termos_de_uso.html">Termos de Uso</a> | <a href="lgpd.html">LGPD</a> | <a href="sobre_empresa.html">Sobre</a></p>
+    </div>
+  </footer>
+
+  <script src="/js/buscar_itens_perdidos.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrar Perdido - Achados e Perdidos SENAI</title>
+  <link rel="stylesheet" href="css/registrar_item_perdido.css">
+  <link rel="icon" href="img/startech-icon.png" type="image/x-icon">
+</head>
+<body>
+  <!-- Cabeçalho -->
+  <header>
+    <div class="container">
+      <img src="img/senai-logo-1.png" alt="Logotipo SENAI" class="logo">
+      <nav>
+        <ul>
+          <li><a href="index.html">Página Inicial</a></li>
+          <li><a href="buscar_itens_perdidos.html">Buscar Itens</a></li>
+          <li><a href="registrar_item_encontrado.html">Registrar Encontrado</a></li>
+          <li><a href="como_funciona.html">Como Funciona</a></li>
+          <li><a href="login.html" class="auth-link">Login</a></li>
+          <li><a href="#" class="logout-link" style="display: none;">Sair</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Seção de Registro -->
+  <section class="registrar">
+    <div class="container">
+      <h1>Registrar Item Perdido</h1>
+      <p>Forneça o máximo de detalhes para comprovar que o item é seu e facilitar a recuperação.</p>
+      <form id="registrar-form">
+        <div class="form-group">
+          <label for="nome-item">Nome do Item</label>
+          <input type="text" id="nome-item" name="nome-item" placeholder="Ex.: Casaco azul" required>
+        </div>
+        <div class="form-group">
+          <label for="descricao">Descrição Detalhada</label>
+          <textarea id="descricao" name="descricao" placeholder="Cor, marca, tamanho, estado, características únicas, etc." required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="local">Último Local Visto</label>
+          <select id="local" name="local" required>
+            <option value="">Selecione um local</option>
+            <option value="biblioteca">Biblioteca</option>
+            <option value="sala">Sala de Aula</option>
+            <option value="refeitorio">Refeitório</option>
+            <option value="outros">Outros</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="data">Data Aproximada de Perda</label>
+          <input type="date" id="data" name="data" required>
+        </div>
+        <div class="form-group">
+          <label for="cor">Cor Principal</label>
+          <input type="text" id="cor" name="cor" placeholder="Ex.: Azul, Preto">
+        </div>
+        <div class="form-group">
+          <label for="marca">Marca (se aplicável)</label>
+          <input type="text" id="marca" name="marca" placeholder="Ex.: Nike, Samsung">
+        </div>
+        <div class="form-group">
+          <label for="caracteristica-unica">Característica Única</label>
+          <input type="text" id="caracteristica-unica" name="caracteristica-unica" placeholder="Ex.: Rasgo no bolso, iniciais gravadas">
+        </div>
+        <div class="form-group">
+          <label for="foto">Foto do Item (opcional)</label>
+          <input type="file" id="foto" name="foto" accept="image/*">
+        </div>
+        <button type="submit" class="btn btn-primary">Registrar</button>
+        <div id="feedback" class="feedback"></div>
+      </form>
+      <p class="privacy-notice">
+        Seus dados estão protegidos conforme a <strong>LGPD</strong>. <a href="lgpd.html">Saiba mais</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer>
+    <div class="container">
+      <p>SENAI | Contato: achados.perdidos@senai.br | <a href="politica_de_privacidade.html">Política de Privacidade</a> | <a href="termos_de_uso.html">Termos de Uso</a> | <a href="lgpd.html">LGPD</a> | <a href="sobre_empresa.html">Sobre</a></p>
+    </div>
+  </footer>
+
+  <script src="js/registrar_item_perdido.js"></script>
+</body>
+</html>
