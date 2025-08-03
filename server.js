@@ -7,6 +7,7 @@ const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const multer = require('multer');
 const session = require('express-session');
+const { exec } = require('child_process');
 
 dotenv.config();
 
@@ -611,4 +612,10 @@ app.delete('/api/remover-item/:id', async (req, res) => {
 // Iniciar servidor
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT} em ${new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })}.`);
+  // Abre o navegador padrão no Windows
+  exec(`start http://localhost:${PORT}`, (err) => {
+    if (err) {
+      console.error('Erro ao abrir o navegador:', err);
+    }
+  });
 });

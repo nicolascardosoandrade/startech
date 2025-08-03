@@ -5,8 +5,10 @@ document.addEventListener('DOMContentLoaded', function() {
   const novaSenhaInput = document.getElementById('nova-senha');
   const confirmarSenhaInput = document.getElementById('confirmar-senha');
   const feedbackDiv = document.getElementById('feedback');
+  const toggleNovaSenha = document.getElementById('toggle-nova-senha');
+  const toggleConfirmarSenha = document.getElementById('toggle-confirmar-senha');
 
-  if (!resetForm || !tokenInput || !novaSenhaInput || !confirmarSenhaInput || !feedbackDiv) {
+  if (!resetForm || !tokenInput || !novaSenhaInput || !confirmarSenhaInput || !feedbackDiv || !toggleNovaSenha || !toggleConfirmarSenha) {
     console.error('Erro: Um ou mais elementos HTML não foram encontrados.');
     return;
   }
@@ -39,15 +41,21 @@ document.addEventListener('DOMContentLoaded', function() {
     return password.length >= 6 && hasLetter && hasNumber;
   }
 
-  // Lógica para alternar visibilidade da senha
-  document.querySelectorAll('.toggle-password').forEach(button => {
-    button.addEventListener('click', function() {
-      const targetId = this.getAttribute('data-target');
-      const input = document.getElementById(targetId);
-      const isPassword = input.type === 'password';
-      input.type = isPassword ? 'text' : 'password';
-      this.classList.toggle('visible');
-    });
+  // Alternar visibilidade da senha
+  toggleNovaSenha.addEventListener('click', function() {
+    if (novaSenhaInput && toggleNovaSenha) {
+      const isPassword = novaSenhaInput.type === 'password';
+      novaSenhaInput.type = isPassword ? 'text' : 'password';
+      toggleNovaSenha.textContent = isPassword ? '🙈' : '👁️';
+    }
+  });
+
+  toggleConfirmarSenha.addEventListener('click', function() {
+    if (confirmarSenhaInput && toggleConfirmarSenha) {
+      const isPassword = confirmarSenhaInput.type === 'password';
+      confirmarSenhaInput.type = isPassword ? 'text' : 'password';
+      toggleConfirmarSenha.textContent = isPassword ? '🙈' : '👁️';
+    }
   });
 
   // Validação e envio do formulário

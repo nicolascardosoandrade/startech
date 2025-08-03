@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const showRegisterLink = document.getElementById('show-register');
   const showLoginLink = document.getElementById('show-login');
   const togglePasswordButtons = document.querySelectorAll('.toggle-password');
-  const headerNav = document.querySelector('header nav ul');
-  const loginLink = document.querySelector('header nav ul li a[href="login.html"]');
+  const userGreeting = document.querySelector('.user-greeting');
+  const logoutLink = document.querySelector('.logout-link');
 
   function showFeedback(message, isError = true, target = feedbackDiv) {
     target.textContent = message;
@@ -142,55 +142,63 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       const data = await response.json();
       console.log('Dados de /api/check-master:', data);
-      if (data.success) {
+      if (data.success && data.user && data.user.is_master) {
         loginPopup.style.display = 'none';
         registerPopup.style.display = 'none';
-        // Usuário master logado: remove o botão de login e adiciona o botão de sair
-        if (loginLink && data.user && data.user.is_master) {
+        // Exibir "Olá, [nome]" no header
+        userGreeting.textContent = `Olá, ${data.user.nome}`;
+        userGreeting.style.display = 'inline';
+        // Exibir o botão de logout e esconder o link de login, se presente
+        if (logoutLink) {
+          logoutLink.style.display = 'inline';
+        }
+        const loginLink = document.querySelector('header nav ul li a[href="login.html"]');
+        if (loginLink) {
           loginLink.style.display = 'none';
-          const logoutItem = document.createElement('li');
-          const logoutLink = document.createElement('a');
-          logoutLink.href = '#';
-          logoutLink.textContent = 'Sair';
-          logoutLink.className = 'logout-link';
-          logoutItem.appendChild(logoutLink);
-          headerNav.appendChild(logoutItem);
-
-          logoutLink.addEventListener('click', async (e) => {
-            e.preventDefault();
-            if (confirm('Tem certeza que deseja sair?')) {
-              try {
-                const logoutResponse = await fetch('/api/logout', {
-                  method: 'POST',
-                  headers: { 
-                    'Content-Type': 'application/json', 
-                    'Accept': 'application/json',
-                    'credentials': 'include'
-                  }
-                });
-                const logoutData = await logoutResponse.json();
-                if (logoutData.success) {
-                  showFeedback('Logout realizado com sucesso!', false);
-                  window.location.href = 'index.html';
-                } else {
-                  showFeedback('Erro ao fazer logout. Tente novamente.', true);
+        }
+        // Adicionar evento de logout
+        logoutLink.addEventListener('click', async (e) => {
+          e.preventDefault();
+          if (confirm('Tem certeza que deseja sair?')) {
+            try {
+              const logoutResponse = await fetch('/api/logout', {
+                method: 'POST',
+                headers: { 
+                  'Content-Type': 'application/json', 
+                  'Accept': 'application/json',
+                  'credentials': 'include'
                 }
-              } catch (error) {
-                console.error('Erro ao fazer logout:', error);
+              });
+              const logoutData = await logoutResponse.json();
+              if (logoutData.success) {
+                showFeedback('Logout realizado com sucesso!', false);
+                setTimeout(() => {
+                  window.location.href = 'index.html';
+                }, 1000); // Redireciona após 1 segundo para exibir o feedback
+              } else {
                 showFeedback('Erro ao fazer logout. Tente novamente.', true);
               }
+            } catch (error) {
+              console.error('Erro ao fazer logout:', error);
+              showFeedback('Erro ao fazer logout. Tente novamente.', true);
             }
-          });
-        }
+          }
+        });
         carregarReivindicacoes();
       } else {
         loginPopup.style.display = 'flex';
         registerPopup.style.display = 'none';
+        if (logoutLink) {
+          logoutLink.style.display = 'none';
+        }
       }
     } catch (error) {
       console.error('Erro ao verificar acesso:', error);
       loginPopup.style.display = 'flex';
       registerPopup.style.display = 'none';
+      if (logoutLink) {
+        logoutLink.style.display = 'none';
+      }
       showFeedback('Erro ao verificar acesso. Verifique a conexão com o servidor.', true, loginFeedback);
     }
   }

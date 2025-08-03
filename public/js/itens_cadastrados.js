@@ -1,12 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
   const listaItens = document.getElementById('lista-itens');
   const feedbackDiv = document.getElementById('feedback');
-  const authButton = document.getElementById('auth-button');
+  const userGreeting = document.querySelector('.user-greeting');
+  const logoutLink = document.querySelector('.logout-link');
 
   // Função para mostrar feedback
   function showFeedback(message, isError = true) {
     feedbackDiv.textContent = message;
-    feedbackDiv.className = `feedback ${isError ? '' : 'success'}`;
+    feedbackDiv.className = `feedback ${isError ? 'error' : 'success'}`;
     setTimeout(() => {
       feedbackDiv.textContent = '';
       feedbackDiv.className = 'feedback';
@@ -14,68 +15,74 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Função para verificar e atualizar o estado de autenticação
-  function verificarAutenticacao() {
-    return fetch('/api/check-auth', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Erro ao verificar autenticação.');
-        }
-        return response.json();
-      })
-      .then(data => {
-        if (!data.success) {
-          showFeedback('Acesso negado. Faça login como usuário master.');
-          window.location.href = 'login.html';
+  async function verificarAutenticacao() {
+    try {
+      const response = await fetch('/api/check-master', {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include'
+      });
+      if (!response.ok) {
+        if (response.status === 401) {
+          showFeedback('Acesso negado. Faça login como usuário master.', true);
+          window.location.href = 'area_restrita.html';
           return false;
         }
-        // Atualiza o botão de autenticação
-        if (data.user.is_master) {
-          authButton.innerHTML = '<a href="#" id="logout-button">Sair</a>';
-          document.getElementById('logout-button').addEventListener('click', function(e) {
-            e.preventDefault();
-            logout();
-          });
+        throw new Error(`Erro HTTP: ${response.status}`);
+      }
+      const data = await response.json();
+      if (data.success && data.user && data.user.is_master) {
+        // Exibir saudação com o nome do usuário
+        userGreeting.textContent = `Olá, ${data.user.nome}`;
+        userGreeting.style.display = 'inline';
+        // Exibir o botão de logout
+        if (logoutLink) {
+          logoutLink.style.display = 'inline';
         }
         return true;
-      })
-      .catch(error => {
-        showFeedback('Erro ao verificar acesso. Tente novamente.');
-        console.error('Erro ao verificar master:', error);
-        window.location.href = 'login.html';
+      } else {
+        showFeedback('Acesso negado. Apenas usuários master podem acessar esta página.', true);
+        window.location.href = 'area_restrita.html';
         return false;
-      });
+      }
+    } catch (error) {
+      console.error('Erro ao verificar acesso:', error);
+      showFeedback('Erro ao verificar acesso. Verifique a conexão com o servidor.', true);
+      window.location.href = 'area_restrita.html';
+      return false;
+    }
   }
 
   // Função para realizar logout
-  function logout() {
+  async function logout(e) {
+    e.preventDefault();
     if (confirm('Tem certeza que deseja sair?')) {
-      fetch('/api/logout', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`Erro HTTP: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then(data => {
-          showFeedback(data.message, !data.success);
-          if (data.success) {
-            window.location.href = 'index.html'; // Redireciona para index.html após logout
-          }
-        })
-        .catch(error => {
-          showFeedback('Erro ao fazer logout.');
-          console.error('Erro ao logout:', error);
+      try {
+        const response = await fetch('/api/logout', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          credentials: 'include'
         });
+        if (!response.ok) {
+          throw new Error(`Erro HTTP: ${response.status}`);
+        }
+        const data = await response.json();
+        showFeedback(data.message, !data.success);
+        if (data.success) {
+          setTimeout(() => {
+            window.location.href = 'index.html';
+          }, 1000); // Redireciona após 1 segundo para exibir o feedback
+        }
+      } catch (error) {
+        showFeedback('Erro ao fazer logout. Tente novamente.', true);
+        console.error('Erro ao fazer logout:', error);
+      }
     }
   }
 
@@ -106,49 +113,55 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Adicionar evento aos botões de remover
     document.querySelectorAll('.btn-remover').forEach(button => {
-      button.addEventListener('click', function() {
+      button.addEventListener('click', async function() {
         const itemId = this.getAttribute('data-id');
         showFeedback(`Removendo item ID ${itemId}...`, false);
-        fetch(`/api/remover-item/${itemId}`, {
-          method: 'DELETE',
-          headers: { 'Content-Type': 'application/json' },
-        })
-          .then(response => {
-            if (!response.ok) {
-              throw new Error(`Erro HTTP: ${response.status}`);
+        try {
+          const response = await fetch(`/api/remover-item/${itemId}`, {
+            method: 'DELETE',
+            headers: { 
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+              'credentials': 'include'
             }
-            return response.json();
-          })
-          .then(data => {
-            showFeedback(data.message, !data.success);
-            if (data.success) {
-              carregarTodosItens(); // Recarregar a lista após remoção
-            }
-          })
-          .catch(error => {
-            showFeedback('Erro ao remover item.');
-            console.error('Erro ao remover:', error);
           });
+          if (!response.ok) {
+            throw new Error(`Erro HTTP: ${response.status}`);
+          }
+          const data = await response.json();
+          showFeedback(data.message, !data.success);
+          if (data.success) {
+            carregarTodosItens();
+          }
+        } catch (error) {
+          showFeedback('Erro ao remover item. Tente novamente.', true);
+          console.error('Erro ao remover:', error);
+        }
       });
     });
   }
 
   // Função para carregar todos os itens
-  function carregarTodosItens() {
-    fetch('/api/itens-encontrados')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`Erro HTTP: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(data => {
-        exibirItens(data);
-      })
-      .catch(error => {
-        showFeedback('Erro ao carregar itens. Verifique a conexão com o servidor.');
-        console.error('Erro ao buscar itens:', error);
+  async function carregarTodosItens() {
+    try {
+      const response = await fetch('/api/itens-encontrados', {
+        headers: { 'Accept': 'application/json' },
+        credentials: 'include'
       });
+      if (!response.ok) {
+        throw new Error(`Erro HTTP: ${response.status}`);
+      }
+      const data = await response.json();
+      exibirItens(data);
+    } catch (error) {
+      showFeedback('Erro ao carregar itens. Verifique a conexão com o servidor.', true);
+      console.error('Erro ao buscar itens:', error);
+    }
+  }
+
+  // Adicionar evento de logout
+  if (logoutLink) {
+    logoutLink.addEventListener('click', logout);
   }
 
   // Inicialização

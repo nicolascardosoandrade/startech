@@ -5,74 +5,88 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
   line-height: 1.6;
   color: #333;
-  background: #f4f4f4;
+  background-color: #f5f5f5; /* Fundo consistente com listar_usuarios */
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Garante que o body ocupe pelo menos a altura da janela */
+  min-height: 100vh; /* Garante que o body ocupe toda a altura da janela */
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
-  flex: 1 0 auto; /* Permite que o conteúdo principal cresça, mas não encolha além do necessário */
 }
 
 /* Cabeçalho */
 header {
-  background: #003087; /* Azul institucional SENAI */
-  color: white;
-  padding: 10px 0;
+  background-color: #fff; /* Fundo branco, igual a listar_usuarios */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px 0;
+  position: sticky;
   top: 0;
   z-index: 100;
 }
 
 header .container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 }
 
-header .logo {
-  height: 50px;
+.logo {
+  height: 80px; /* Tamanho do logo igual a listar_usuarios */
 }
 
-header nav ul {
+.user-greeting {
+  font-size: 1rem;
+  color: #1976d2; /* Azul primário do sistema */
+  margin: 0 20px;
+}
+
+nav ul {
   list-style: none;
   display: flex;
   gap: 20px;
 }
 
-header nav ul li a {
-  color: white;
+nav ul li a {
   text-decoration: none;
-  font-weight: bold;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s;
 }
 
-header nav ul li a:hover {
-  text-decoration: underline;
+nav ul li a:hover {
+  color: #1976d2; /* Azul primário para hover */
 }
 
 /* Seção de Itens Cadastrados */
 .itens-cadastrados {
-  padding: 50px 0;
+  flex: 1; /* Faz a seção crescer para empurrar o footer para baixo */
+  padding: 60px 0; /* Ajustado para consistência com listar_usuarios */
   text-align: center;
-  flex: 1 0 auto; /* Garante que a seção ocupe o espaço disponível */
+  background-color: #f5f5f5; /* Fundo consistente */
 }
 
 .itens-cadastrados h1 {
-  font-size: 2em;
-  color: #003087;
-  margin-bottom: 10px;
+  font-size: 2.5rem; /* Ajustado para consistência */
+  color: #333; /* Cor do texto principal */
+  margin-bottom: 40px; /* Ajustado para consistência */
+  font-weight: 700;
 }
 
 .itens-cadastrados p {
-  font-size: 1.1em;
+  font-size: 1.2rem; /* Ajustado para consistência */
   margin-bottom: 20px;
+  color: #333;
 }
 
 .lista-itens {
@@ -111,7 +125,7 @@ header nav ul li a:hover {
 }
 
 .item-info p strong {
-  color: #003087;
+  color: #1976d2; /* Ajustado para azul primário */
 }
 
 .btn-remover {
@@ -141,37 +155,42 @@ header nav ul li a:hover {
 
 /* Rodapé */
 footer {
-  background: #003087;
-  color: white;
-  text-align: center;
-  padding: 10px 0;
-  flex-shrink: 0; /* Impede que o footer encolha */
+  background-color: #333; /* Cinza escuro, consistente com listar_usuarios */
+  color: #fff;
+  padding: 20px 0;
+  width: 100%; /* Garante que o footer ocupe toda a largura */
 }
 
-/* Para garantir que o footer fique no final em conteúdo curto */
-footer {
-  width: 100%;
+footer p {
+  text-align: center;
+  font-size: 0.9rem;
 }
 
 footer a {
-  color: white;
+  color: #bbdefb; /* Azul claro para links, consistente com listar_usuarios */
   text-decoration: none;
+  margin: 0 5px;
 }
 
 footer a:hover {
-  text-decoration: underline;
+  color: #fff;
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
   header .container {
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
   }
 
-  header nav ul {
+  nav ul {
     flex-direction: column;
+    gap: 10px;
     text-align: center;
+  }
+
+  .itens-cadastrados h1 {
+    font-size: 2rem;
   }
 
   .item-card {
@@ -188,5 +207,11 @@ footer a:hover {
   .btn-remover {
     width: 100%;
     text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .itens-cadastrados {
+    padding: 30px 0;
   }
 }

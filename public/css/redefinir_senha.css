@@ -63,10 +63,11 @@ body {
 
 .password-wrapper input {
   width: 100%;
-  padding: 10px 40px 10px 10px; /* Espaço à direita para o botão */
+  padding: 10px 40px 10px 10px; /* Espaço à direita para o ícone */
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 1em;
+  box-sizing: border-box;
 }
 
 .password-wrapper .toggle-password {
@@ -74,27 +75,13 @@ body {
   right: 10px;
   top: 50%;
   transform: translateY(-50%);
-  border: none;
-  background: none;
   cursor: pointer;
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  font-size: 0; /* Remove texto padrão */
-}
-
-.toggle-password::after {
-  content: '🙈'; /* Ícone padrão (esconder) */
   font-size: 1.2em;
   color: #003087;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.toggle-password.visible::after {
-  content: '👁️'; /* Ícone quando visível (mostrar) */
+  background: none;
+  border: none;
+  padding: 5px;
+  z-index: 1; /* Garante que o span fique acima do input */
 }
 
 .btn {

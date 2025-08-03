@@ -5,14 +5,18 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
   line-height: 1.6;
   color: #333;
-  background: #f4f4f4;
+  background-color: #f5f5f5; /* Fundo consistente com listar_usuarios */
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100vh; /* Garante que o body ocupe toda a altura da janela */
 }
 
 /* Container */
@@ -24,37 +28,45 @@ body {
 
 /* Cabeçalho */
 header {
-  background: #003087;
-  color: white;
-  padding: 10px 0;
+  background-color: #fff; /* Fundo branco, igual a listar_usuarios */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px 0;
+  position: sticky;
   top: 0;
   z-index: 100;
 }
 
 header .container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 }
 
-header .logo {
-  height: 50px;
+.logo {
+  height: 80px; /* Tamanho do logo igual a listar_usuarios */
 }
 
-header nav ul {
+.user-greeting {
+  font-size: 1rem;
+  color: #1976d2; /* Azul primário do sistema */
+  margin: 0 20px;
+}
+
+nav ul {
   list-style: none;
   display: flex;
   gap: 20px;
 }
 
-header nav ul li a {
-  color: white;
+nav ul li a {
   text-decoration: none;
-  font-weight: bold;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s;
 }
 
-header nav ul li a:hover {
-  text-decoration: underline;
+nav ul li a:hover {
+  color: #1976d2; /* Azul primário para hover */
 }
 
 /* Popup de Login e Cadastro */
@@ -83,7 +95,7 @@ header nav ul li a:hover {
 }
 
 .popup-content h2 {
-  color: #003087;
+  color: #1976d2; /* Ajustado para azul primário */
   margin-bottom: 20px;
 }
 
@@ -96,7 +108,7 @@ header nav ul li a:hover {
   display: block;
   font-weight: bold;
   margin-bottom: 5px;
-  color: #003087;
+  color: #1976d2; /* Ajustado para azul primário */
 }
 
 .form-group input {
@@ -130,11 +142,11 @@ header nav ul li a:hover {
 }
 
 .toggle-password:hover {
-  color: #003087;
+  color: #1976d2; /* Ajustado para azul primário */
 }
 
 .btn-login, .btn-registrar {
-  background: #003087;
+  background: #1976d2; /* Ajustado para azul primário */
   color: white;
   border: none;
   padding: 10px 20px;
@@ -146,7 +158,7 @@ header nav ul li a:hover {
 }
 
 .btn-login:hover, .btn-registrar:hover {
-  background: #00205b;
+  background: #1565c0; /* Azul escuro para hover */
 }
 
 .toggle-popup {
@@ -155,7 +167,7 @@ header nav ul li a:hover {
 }
 
 .toggle-popup a {
-  color: #003087;
+  color: #1976d2; /* Ajustado para azul primário */
   text-decoration: none;
   font-weight: bold;
 }
@@ -166,20 +178,23 @@ header nav ul li a:hover {
 
 /* Seção de Área Restrita */
 .area-restrita {
-  padding: 50px 0;
+  flex: 1; /* Faz a seção crescer para empurrar o footer para baixo */
+  padding: 60px 0; /* Ajustado para consistência com listar_usuarios */
   text-align: center;
-  flex: 1 0 auto;
+  background-color: #f5f5f5; /* Fundo consistente */
 }
 
 .area-restrita h1 {
-  font-size: 2em;
-  color: #003087;
-  margin-bottom: 10px;
+  font-size: 2.5rem; /* Ajustado para consistência */
+  color: #333; /* Cor do texto principal */
+  margin-bottom: 40px; /* Ajustado para consistência */
+  font-weight: 700;
 }
 
 .area-restrita p {
-  font-size: 1.1em;
+  font-size: 1.2rem; /* Ajustado para consistência */
   margin-bottom: 20px;
+  color: #333;
 }
 
 .feedback {
@@ -201,23 +216,33 @@ header nav ul li a:hover {
   border-collapse: collapse;
   margin-top: 20px;
   background: white;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Ajustado para consistência */
 }
 
 #tabela-reivindicacoes th,
 #tabela-reivindicacoes td {
-  padding: 10px;
-  border: 1px solid #ddd;
+  padding: 15px; /* Ajustado para consistência */
+  border-bottom: 1px solid #e0e0e0; /* Ajustado para consistência */
   text-align: left;
+  font-size: 0.95rem;
 }
 
 #tabela-reivindicacoes th {
-  background: #003087;
+  background: #1976d2; /* Ajustado para azul primário */
   color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 #tabela-reivindicacoes tr:nth-child(even) {
-  background: #f9f9f9;
+  background: #f9f9f9; /* Ajustado para consistência */
+}
+
+#tabela-reivindicacoes tr:hover {
+  background: #e3f2fd; /* Azul claro para hover, consistente com listar_usuarios */
 }
 
 .btn-aprovar,
@@ -251,31 +276,37 @@ header nav ul li a:hover {
 
 /* Rodapé */
 footer {
-  background: #003087;
-  color: white;
+  background-color: #333; /* Cinza escuro, consistente com listar_usuarios */
+  color: #fff;
+  padding: 20px 0;
+  width: 100%; /* Garante que o footer ocupe toda a largura */
+}
+
+footer p {
   text-align: center;
-  padding: 10px 0;
-  flex-shrink: 0;
+  font-size: 0.9rem;
 }
 
 footer a {
-  color: white;
+  color: #bbdefb; /* Azul claro para links, consistente com listar_usuarios */
   text-decoration: none;
+  margin: 0 5px;
 }
 
 footer a:hover {
-  text-decoration: underline;
+  color: #fff;
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
   header .container {
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
   }
 
-  header nav ul {
+  nav ul {
     flex-direction: column;
+    gap: 10px;
     text-align: center;
   }
 
@@ -284,20 +315,17 @@ footer a:hover {
   }
 
   .area-restrita h1 {
-    font-size: 1.5em;
+    font-size: 2rem;
   }
 
   .area-restrita p {
     font-size: 1em;
   }
 
-  #tabela-reivindicacoes {
-    font-size: 0.9em;
-  }
-
   #tabela-reivindicacoes th,
   #tabela-reivindicacoes td {
-    padding: 8px;
+    padding: 10px;
+    font-size: 0.85rem;
   }
 
   .btn-aprovar,
@@ -318,5 +346,11 @@ footer a:hover {
   .popup-content {
     width: 95%;
     padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .area-restrita {
+    padding: 30px 0;
   }
 }
