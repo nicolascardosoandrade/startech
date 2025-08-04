@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             const result = await response.json();
             if (result.success) {
-              showFeedback(`Reivindicação ${acao} com sucesso!`, false);
+              showFeedback(`Reivindicação ${acao === 'aprovar' ? 'aprovada e movida para o histórico de itens devolvidos!' : 'rejeitada com sucesso!'}`, false);
               carregarReivindicacoes();
             } else {
               showFeedback(result.message || `Erro ao ${acao} reivindicação.`, true);
@@ -145,10 +145,8 @@ document.addEventListener('DOMContentLoaded', function() {
       if (data.success && data.user && data.user.is_master) {
         loginPopup.style.display = 'none';
         registerPopup.style.display = 'none';
-        // Exibir "Olá, [nome]" no header
         userGreeting.textContent = `Olá, ${data.user.nome}`;
         userGreeting.style.display = 'inline';
-        // Exibir o botão de logout e esconder o link de login, se presente
         if (logoutLink) {
           logoutLink.style.display = 'inline';
         }
@@ -156,7 +154,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (loginLink) {
           loginLink.style.display = 'none';
         }
-        // Adicionar evento de logout
         logoutLink.addEventListener('click', async (e) => {
           e.preventDefault();
           if (confirm('Tem certeza que deseja sair?')) {
@@ -174,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 showFeedback('Logout realizado com sucesso!', false);
                 setTimeout(() => {
                   window.location.href = 'index.html';
-                }, 1000); // Redireciona após 1 segundo para exibir o feedback
+                }, 1000);
               } else {
                 showFeedback('Erro ao fazer logout. Tente novamente.', true);
               }
@@ -244,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (data.redirect === '/area_restrita.html') {
           loginPopup.style.display = 'none';
           showFeedback('Login bem-sucedido! Carregando reivindicações...', false, loginFeedback);
-          verificarAcesso(); // Recarrega a verificação após login
+          verificarAcesso();
         } else {
           showFeedback('Acesso negado. Apenas usuários master podem acessar esta área.', true, loginFeedback);
         }
@@ -266,7 +263,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const senha = document.getElementById('senha-register').value;
     const confirmar_senha = document.getElementById('confirmar-senha').value;
 
-    // Client-side validations
     if (!nome || nome.length < 2) {
       showFeedback('O nome deve ter pelo menos 2 caracteres.', true, registerFeedback);
       return;

@@ -104,7 +104,7 @@ app.get('/api/check-master', (req, res) => {
   }
 });
 
-// Nova rota para verificar master via e-mail (usada em itens_cadastrados.js)
+// Rota para verificar master via e-mail
 app.post('/api/verificar-master', async (req, res) => {
   const { email } = req.body;
   if (!email) {
@@ -246,7 +246,7 @@ app.post('/api/registrar-master', async (req, res) => {
   }
 });
 
-// Rota para login com logs de depuração
+// Rota para login
 app.post('/api/login', async (req, res) => {
   const { registro, senha } = req.body;
   console.log(`[${new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })}] Tentativa de login - Registro: ${registro}, Senha: [HIDDEN]`);
@@ -333,7 +333,7 @@ app.post('/api/registrar-encontrado', upload.single('foto'), async (req, res) =>
   const validCategories = ['todas', 'roupas', 'eletronicos', 'documentos', 'outros'];
 
   if (!nome_item || !descricao || !local || !data || !categoria) {
-    return res.status(400).json({ success: false, message: 'Todos os campos obrigatórios devem be preenchidos.' });
+    return res.status(400).json({ success: false, message: 'Todos os campos obrigatórios devem ser preenchidos.' });
   }
   if (!validCategories.includes(categoria)) {
     return res.status(400).json({ success: false, message: 'Categoria inválida. Escolha entre: ' + validCategories.join(', ') + '.' });
@@ -357,12 +357,33 @@ app.post('/api/registrar-encontrado', upload.single('foto'), async (req, res) =>
 app.get('/api/itens-encontrados', async (req, res) => {
   try {
     console.log('Tentando buscar todos os itens da tabela itens_encontrados...');
-    const [rows] = await db.query('SELECT * FROM itens_encontrados');
+    const [rows] = await db.query('SELECT * FROM itens_encontrados WHERE status = "pendente"');
     console.log('Itens encontrados:', rows);
     res.status(200).json(rows);
   } catch (error) {
     console.error(`Erro ao buscar itens em ${new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })}:`, error);
     res.status(500).json({ success: false, message: 'Erro ao buscar itens.' });
+  }
+});
+
+// Rota para buscar itens devolvidos
+app.get('/api/itens-devolvidos', async (req, res) => {
+  const user = req.session.user;
+  if (!user || !user.is_master) {
+    return res.status(401).json({ success: false, message: 'Acesso restrito a usuários master.' });
+  }
+
+  try {
+    const [rows] = await db.query(`
+      SELECT id, nome_item, descricao, categoria, local_encontrado, data_encontrada, foto_path, data_devolvida, reivindicado_por
+      FROM itens_encontrados
+      WHERE status = 'reclamado' AND status_reivindicacao = 'aprovado'
+    `);
+    console.log(`Itens devolvidos encontrados: ${rows.length}`);
+    res.status(200).json(rows);
+  } catch (error) {
+    console.error(`Erro ao buscar itens devolvidos em ${new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })}:`, error);
+    res.status(500).json({ success: false, message: 'Erro ao buscar itens devolvidos.' });
   }
 });
 
@@ -492,7 +513,23 @@ app.post('/api/admin/reivindicacao/:id', async (req, res) => {
     await db.query('UPDATE reivindicacoes SET status = ? WHERE id = ?', [newStatus, reivindicacaoId]);
 
     const itemStatus = acao === 'aprovar' ? 'aprovado' : 'rejeitado';
-    await db.query('UPDATE itens_encontrados SET status_reivindicacao = ?, status = ? WHERE id = ?', [itemStatus, acao === 'aprovar' ? 'reclamado' : 'pendente', reivindicacao.item_id]);
+    const updateFields = {
+      status_reivindicacao: itemStatus,
+      status: acao === 'aprovar' ? 'reclamado' : 'pendente'
+    };
+
+    if (acao === 'aprovar') {
+      const [users] = await db.query('SELECT nome, sobrenome FROM usuarios WHERE id = ?', [reivindicacao.user_id]);
+      const user = users[0];
+      updateFields.data_devolvida = new Date().toISOString().split('T')[0]; // Data atual no formato YYYY-MM-DD
+      updateFields.reivindicado_por = `${user.nome} ${user.sobrenome}`;
+      updateFields.usuario_reivindicado_id = reivindicacao.user_id;
+    }
+
+    await db.query(
+      'UPDATE itens_encontrados SET status_reivindicacao = ?, status = ?, data_devolvida = ?, reivindicado_por = ?, usuario_reivindicado_id = ? WHERE id = ?',
+      [updateFields.status_reivindicacao, updateFields.status, updateFields.data_devolvida || null, updateFields.reivindicado_por || null, updateFields.usuario_reivindicado_id || null, reivindicacao.item_id]
+    );
 
     const [users] = await db.query('SELECT * FROM usuarios WHERE id = ?', [reivindicacao.user_id]);
     const [items] = await db.query('SELECT * FROM itens_encontrados WHERE id = ?', [reivindicacao.item_id]);

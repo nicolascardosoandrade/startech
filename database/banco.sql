@@ -44,6 +44,8 @@ CREATE TABLE IF NOT EXISTS itens_encontrados (
   status ENUM('pendente', 'reclamado') DEFAULT 'pendente',
   status_reivindicacao ENUM('pendente', 'aprovado', 'rejeitado', 'nao_reivindicado') DEFAULT 'nao_reivindicado',
   usuario_reivindicado_id INT DEFAULT NULL,
+  data_devolvida DATE DEFAULT NULL,
+  reivindicado_por VARCHAR(255) DEFAULT NULL,
   FOREIGN KEY (usuario_reivindicado_id) REFERENCES usuarios(id) ON DELETE SET NULL,
   INDEX idx_local_data (local_encontrado, data_encontrada),
   INDEX idx_status (status),
