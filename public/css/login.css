@@ -10,6 +10,9 @@ body {
   line-height: 1.6;
   color: #333;
   background: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* Container */
@@ -58,6 +61,7 @@ header nav ul li a:hover {
 .login {
   padding: 50px 0;
   text-align: center;
+  flex: 1;
 }
 
 .login h1 {
@@ -166,7 +170,6 @@ footer {
   color: white;
   text-align: center;
   padding: 10px 0;
-  margin-top: 20px;
 }
 
 footer a {
