@@ -13,42 +13,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 5000);
   }
 
-  // Verificar autenticação
-  function verificarAutenticacao() {
-    return fetch('/api/check-auth', {
-      method: 'GET',
-      credentials: 'include',
+  // Verificar se o usuário está autenticado para exibir link de logout
+  fetch('/api/check-auth', {
+    method: 'GET',
+    credentials: 'include',
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        authLink.style.display = 'none';
+        logoutLink.style.display = 'block';
+      }
     })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Erro ao verificar autenticação.');
-        }
-        return response.json();
-      })
-      .then(data => {
-        if (data.success) {
-          // Usuário autenticado: ocultar Login, exibir Sair
-          authLink.style.display = 'none';
-          logoutLink.style.display = 'block';
-          return true;
-        } else {
-          // Usuário não autenticado: redirecionar para login
-          showFeedback('Você precisa estar logado para acessar esta página.');
-          setTimeout(() => {
-            window.location.href = 'login.html';
-          }, 500);
-          return false;
-        }
-      })
-      .catch(error => {
-        showFeedback('Erro ao verificar autenticação. Tente novamente.');
-        console.error('Erro ao verificar autenticação:', error);
-        setTimeout(() => {
-          window.location.href = 'login.html';
-        }, 500);
-        return false;
-      });
-  }
+    .catch(error => {
+      console.error('Erro ao verificar autenticação:', error);
+    });
 
   // Configurar logout
   if (logoutLink) {
@@ -113,13 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Inicialização: Verificar autenticação ao carregar a página
-  verificarAutenticacao().then(isAuthenticated => {
-    if (isAuthenticated) {
-      // Acessibilidade: Foco na seção principal se autenticado
-      document.querySelector('.como-funciona h1').setAttribute('tabindex', '0');
-      document.querySelector('.como-funciona h1').focus();
-    }
-    // Se não autenticado, o redirecionamento já foi tratado na função verificarAutenticacao
-  });
+  // Acessibilidade: Foco na seção principal
+  document.querySelector('.como-funciona h1').setAttribute('tabindex', '0');
+  document.querySelector('.como-funciona h1').focus();
 });

@@ -13,42 +13,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 5000);
   }
 
-  // Verificar autenticação
-  function verificarAutenticacao() {
-    return fetch('/api/check-auth', {
-      method: 'GET',
-      credentials: 'include',
+  // Verificar se o usuário está autenticado para exibir link de logout
+  fetch('/api/check-auth', {
+    method: 'GET',
+    credentials: 'include',
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        authLink.style.display = 'none';
+        logoutLink.style.display = 'block';
+      }
     })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Erro ao verificar autenticação.');
-        }
-        return response.json();
-      })
-      .then(data => {
-        if (data.success) {
-          // Usuário autenticado: ocultar Login, exibir Sair
-          authLink.style.display = 'none';
-          logoutLink.style.display = 'block';
-          return true;
-        } else {
-          // Usuário não autenticado: redirecionar para login
-          showFeedback('Você precisa estar logado para acessar esta página.');
-          setTimeout(() => {
-            window.location.href = 'login.html';
-          }, 500);
-          return false;
-        }
-      })
-      .catch(error => {
-        showFeedback('Erro ao verificar autenticação. Tente novamente.');
-        console.error('Erro ao verificar autenticação:', error);
-        setTimeout(() => {
-          window.location.href = 'login.html';
-        }, 500);
-        return false;
-      });
-  }
+    .catch(error => {
+      console.error('Erro ao verificar autenticação:', error);
+    });
 
   // Configurar logout
   if (logoutLink) {
@@ -110,22 +89,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Carregar estado do localStorage
-  function loadState(secoes) {
-    secoes.forEach(secao => {
-      const secaoId = secao.getAttribute('data-secao');
-      if (secaoId) {
-        const isActive = localStorage.getItem(`politica-secao-${secaoId}`) === 'true';
-        if (isActive) secao.classList.add('active');
-      }
-    });
-  }
-
   // Tornar seções colapsáveis
   const secoes = document.querySelectorAll('.politica-secao');
   if (secoes.length > 0) {
-    loadState(secoes); // Carrega o estado ao iniciar
+    // Garante que todas as seções iniciem colapsadas
     secoes.forEach(secao => {
+      const secaoId = secao.getAttribute('data-secao');
+      if (secaoId) {
+        localStorage.removeItem(`politica-secao-${secaoId}`); // Limpa o estado salvo
+        secao.classList.remove('active'); // Remove a classe active
+      }
       const cabecalho = secao.querySelector('h2');
       const conteudo = secao.querySelector('.collapsible-content');
       if (cabecalho && conteudo) {
@@ -165,13 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.warn('Botão WhatsApp não encontrado.');
   }
 
-  // Inicialização: Verificar autenticação ao carregar a página
-  verificarAutenticacao().then(isAuthenticated => {
-    if (isAuthenticated) {
-      // Acessibilidade: Foco na seção principal se autenticado
-      document.querySelector('.hero h1').setAttribute('tabindex', '0');
-      document.querySelector('.hero h1').focus();
-    }
-    // Se não autenticado, o redirecionamento já foi tratado na função verificarAutenticacao
-  });
+  // Acessibilidade: Foco na seção principal
+  document.querySelector('.hero h1').setAttribute('tabindex', '0');
+  document.querySelector('.hero h1').focus();
 });
