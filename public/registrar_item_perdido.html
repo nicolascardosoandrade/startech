@@ -40,12 +40,44 @@
           <textarea id="descricao" name="descricao" placeholder="Cor, marca, tamanho, estado, características únicas, etc." required></textarea>
         </div>
         <div class="form-group">
+          <label for="categoria">Categoria</label>
+          <select id="categoria" name="categoria" required>
+            <option value="">Selecione uma categoria</option>
+            <option value="documentos_identificacoes">Documentos / Identificações</option>
+            <option value="eletronicos">Eletrônicos</option>
+            <option value="objetos_pessoais">Objetos Pessoais</option>
+            <option value="roupas_acessorios">Roupas / Acessórios</option>
+            <option value="itens_transporte">Itens de Transporte</option>
+            <option value="itens_esportivos">Itens Esportivos</option>
+            <option value="materiais_estudo_escritorio">Materiais de Estudo / Escritório</option>
+            <option value="itens_saude">Itens de Saúde</option>
+            <option value="objetos_diversos">Objetos Diversos</option>
+            <option value="outros">Outros</option>
+          </select>
+        </div>
+        <div class="form-group">
           <label for="local">Último Local Visto</label>
           <select id="local" name="local" required>
             <option value="">Selecione um local</option>
+            <option value="salas_de_aula">Salas de Aula</option>
+            <option value="laboratorios_tecnicos">Laboratórios Técnicos</option>
+            <option value="oficinas_praticas_areas_producao">Oficinas Práticas / Áreas de Produção</option>
             <option value="biblioteca">Biblioteca</option>
-            <option value="sala">Sala de Aula</option>
-            <option value="refeitorio">Refeitório</option>
+            <option value="refeitorio_cantina">Refeitório / Cantina</option>
+            <option value="banheiros">Banheiros</option>
+            <option value="area_convivencia_patio">Área de Convivência / Pátio</option>
+            <option value="auditorio_salas_palestras">Auditório / Salas de Palestras</option>
+            <option value="sala_professores_coordenacao">Sala dos Professores / Coordenação</option>
+            <option value="estacionamento_bicicletario">Estacionamento / Bicicletário</option>
+            <option value="recepcao_entrada_principal">Recepção / Entrada Principal</option>
+            <option value="corredores_internos">Corredores Internos</option>
+            <option value="escadas_halls_acesso">Escadas / Halls de Acesso</option>
+            <option value="secretaria_academica">Secretaria Acadêmica</option>
+            <option value="area_atendimento_aluno">Área de Atendimento ao Aluno</option>
+            <option value="laboratorios_informatica_salas_computadores">Laboratórios de Informática / Salas com Computadores</option>
+            <option value="area_externa_jardim_quintal">Área externa / Jardim / Quintal</option>
+            <option value="sala_equipamentos_almoxarifado">Sala de Equipamentos / Almoxarifado</option>
+            <option value="copas_internas">Copas internas (de funcionários ou docentes)</option>
             <option value="outros">Outros</option>
           </select>
         </div>

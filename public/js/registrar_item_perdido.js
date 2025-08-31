@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const registrarForm = document.getElementById('registrar-form');
   const nomeItemInput = document.getElementById('nome-item');
   const descricaoInput = document.getElementById('descricao');
+  const categoriaSelect = document.getElementById('categoria'); // Novo campo
   const localSelect = document.getElementById('local');
   const dataInput = document.getElementById('data');
   const corInput = document.getElementById('cor');
@@ -94,6 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
     event.preventDefault();
     const nomeItem = nomeItemInput.value.trim();
     const descricao = descricaoInput.value.trim();
+    const categoria = categoriaSelect.value; // Novo campo
     const local = localSelect.value;
     const data = dataInput.value;
     const cor = corInput.value.trim();
@@ -113,6 +115,12 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
+    if (!categoria) {
+      showFeedback('Selecione uma categoria.');
+      categoriaSelect.focus();
+      return;
+    }
+
     if (!local) {
       showFeedback('Selecione o último local visto.');
       localSelect.focus();
@@ -125,10 +133,11 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
-    // Preparar dados para envio
+    // Preparar's dados para envio
     const formData = new FormData();
     formData.append('nome_item', nomeItem);
     formData.append('descricao', descricao);
+    formData.append('categoria', categoria); // Novo campo
     formData.append('local', local);
     formData.append('data', data);
     if (cor) formData.append('cor', cor);
